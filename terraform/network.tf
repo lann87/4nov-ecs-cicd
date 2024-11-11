@@ -11,7 +11,7 @@ resource "aws_subnet" "pub_subnets" {
   map_public_ip_on_launch = true
 
   # Availability zone for the subnet, selected from the input variable
-  availability_zone = var.azs[count.index]
+  availability_zone = var.pub-azs[count.index]
 
   tags = {
     Name = "ce7-ap-pubsubnet-${count.index + 1}"
@@ -46,6 +46,9 @@ resource "aws_subnet" "pvt_subnets" {
 
   # CIDR block for the private subnet, based on the input variable
   cidr_block = var.pvt_subnet_cidrs[count.index]
+
+  # Availability zone for the subnet, selected from the input variable
+  availability_zone = var.pvt-azs[count.index]
 
   # Tags to identify the private subnet
   tags = {

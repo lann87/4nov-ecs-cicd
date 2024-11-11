@@ -1,9 +1,11 @@
+# VPC Variables
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string
   default     = "10.0.0.0/16"
 }
 
+# Subnets Variables
 variable "pub_subnet_cidrs" {
   description = "CIDR blocks for pub subnets"
   type        = list(string)
@@ -16,7 +18,13 @@ variable "pvt_subnet_cidrs" {
   default     = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 }
 
-variable "azs" {
+variable "pub-azs" {
+  description = "List of AZ for subnet"
+  type        = list(string)
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+}
+
+variable "pvt-azs" {
   description = "List of AZ for subnet"
   type        = list(string)
   default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
@@ -34,12 +42,20 @@ variable "allowed_ingress_cidr" {
   default     = "0.0.0.0/0"
 }
 
+variable "" {
+  
+}
+
+# Elastic Container Repo Variables
 variable "ecr_repo_name" {
   description = "Name of the ECR repository"
   type        = string
   default     = "nov4_ecs_ecr"
 }
 
+# Elastic Container Service Variables
+
+# Application Load Balancer Variables
 variable "alb_name" {
   description = "Name of ALB"
   type        = string

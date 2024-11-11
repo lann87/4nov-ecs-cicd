@@ -26,6 +26,7 @@ resource "aws_lb_listener" "nov4_listener" {
   load_balancer_arn = aws_alb.nov4_alb.arn
   port              = var.alb_listener_port
   protocol          = var.alb_protocol
+
   # Default action for the listener is to forward traffic to a target group
   default_action {
     # Type of action, in this case, forwarding traffic to a target group
@@ -39,6 +40,7 @@ resource "aws_lb_target_group" "nov4_targrp" {
   name     = "nov4-targrp"
   port     = var.alb_target_port
   protocol = var.alb_protocol
+  target_type = "ip"
   vpc_id   = aws_vpc.main_vpc.id
 
   # Health check configuration to monitor the health of targets
