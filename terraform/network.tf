@@ -61,7 +61,7 @@ resource "aws_subnet" "pvt_subnets" {
 resource "aws_security_group" "ecs_sg" {
   #checkov:skip=CKV_AWS_260:Ensure no security groups allow ingress from 0.0.0.0:0 to port 80
   description = "Security group for ECS allowing HTTP access and all egress traffic"
-  vpc_id = aws_vpc.main_vpc.id
+  vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
     description = "Allow incoming TCP traffic on port 80 from IPs defined in var.allowed_ingress_cidr"
