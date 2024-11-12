@@ -16,6 +16,6 @@ resource "aws_ecr_repository" "nov4_ecs_ecr" {
 }
 
 # Data source to retrieve the details of the ECR repository created above
-data "aws_ecr_repository" "nov4_ecr_repo_data" {
-  name = aws_ecr_repository.nov4_ecs_ecr.name
-}
+#data "aws_ecr_repository" "nov4_ecr_repo_data" {
+#  name = aws_ecr_repository.nov4_ecs_ecr.name
+#}

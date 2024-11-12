@@ -59,6 +59,6 @@ resource "aws_lb_target_group" "nov4_targrp" {
 }
 
 # Data source to retrieve the details of the target group
-data "aws_lb_target_group" "targrp_data" {
-  name = aws_lb_target_group.nov4_targrp.name
-}
+# data "aws_lb_target_group" "targrp_data" {
+#   name = aws_lb_target_group.nov4_targrp.name
+# }
