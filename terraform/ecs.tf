@@ -16,28 +16,30 @@ resource "aws_ecs_task_definition" "ecs_task" {
   execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
 
   # Container definition in JSON format, describing the containers in the task
-  container_definitions = jsonencode([{
-    name = "ap-nov4-ecs-container"
+  container_definitions = jsonencode([
+    {
+      name = "ap-nov4-ecs-container"
 
-    # URL of the image stored in ECR, with the "latest" tag
-    image  = "${aws_ecr_repository.nov4_ecs_ecr.repository_url}:latest"
-    memory = 512
-    cpu    = 256
+      # URL of the image stored in ECR, with the "latest" tag
+      image  = "${aws_ecr_repository.nov4_ecs_ecr.repository_url}:latest"
+      memory = 512
+      cpu    = 256
 
-    # Mark the container as essential, meaning the task won't stop if it fails
-    essential = true
+      # Mark the container as essential, meaning the task won't stop if it fails
+      essential = true
 
-    # Port mappings for the container, mapping container port 80 to host port 80
-    portMappings = [{
-      containerPort = 80
-      hostPort      = 80
-    }]
+      # Port mappings for the container, mapping container port 80 to host port 80
+      portMappings = [{
+        containerPort = 80
+        hostPort      = 80
+      }]
 
-    # ECS containers are limited to read-only access to root filesystems
-    linuxParameters = {
-      readonlyRootFilesystem = true
+      # ECS containers are limited to read-only access to root filesystems
+      linuxParameters = {
+        readonlyRootFilesystem = true
+      }
     }
-  }])
+  ])
 
   # Specifies that this task is compatible with Fargate (serverless compute)
   requires_compatibilities = ["FARGATE"]
