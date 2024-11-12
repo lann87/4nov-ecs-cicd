@@ -7,12 +7,16 @@ output "vpc_id" {
 
 output "pubsub_ids" {
   # Outputs the IDs of the public subnets created
-  value = aws_subnet.pub_subnets[*].id
+  value = {
+    for subnet in aws_subnet.pub_subnets : subnet.tags["name"] => subnet.id
+  }
 }
 
 output "pvtsub_ids" {
   # Outputs the IDs of the private subnets created
-  value = aws_subnet.pvt_subnets[*].id
+  value = {
+    for sunet in aws_subnet.pvt_subnets : subnet.tags["name"] => subnet.id
+  }
 }
 
 output "ecs_sg_id" {

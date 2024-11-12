@@ -42,10 +42,6 @@ variable "allowed_ingress_cidr" {
   default     = "0.0.0.0/0"
 }
 
-variable "" {
-  
-}
-
 # Elastic Container Repo Variables
 variable "ecr_repo_name" {
   description = "Name of the ECR repository"
