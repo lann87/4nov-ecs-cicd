@@ -37,11 +37,11 @@ resource "aws_lb_listener" "nov4_listener" {
 
 # Define a target group to register targets (e.g., ECS instances)
 resource "aws_lb_target_group" "nov4_targrp" {
-  name     = "nov4-targrp"
-  port     = var.alb_target_port
-  protocol = var.alb_protocol
+  name        = "nov4-targrp"
+  port        = var.alb_target_port
+  protocol    = var.alb_protocol
   target_type = "ip"
-  vpc_id   = aws_vpc.main_vpc.id
+  vpc_id      = aws_vpc.main_vpc.id
 
   # Health check configuration to monitor the health of targets
   health_check {
