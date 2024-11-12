@@ -3,7 +3,7 @@ resource "aws_alb" "nov4_alb" {
   #checkov:skip=CKV_AWS_2:Ensure ALB protocol is HTTPS
   #checkov:skip=CKV_AWS_150:Ensure that Load Balancer has deletion protection enabled
   #checkov:skip=CKV_AWS_91:Ensure the ELBv2 (Application/Network) has access logging enabled
-  #checkov:skip=CKV_AWS_378:Ensure AWS Load Balancer doesn't use HTTP protocol
+  #checkov:skip=CKV_AWS_378:Ensure AWS Load Balancers doesn't use HTTP protocol
   #checkov:skip=CKV2_AWS_20:Ensure that ALB redirects HTTP requests into HTTPS ones
   #checkov:skip=CKV2_AWS_28:Ensure public facing ALB are protected by WAF
 
