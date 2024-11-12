@@ -6,7 +6,7 @@ resource "aws_vpc" "main_vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "ce7-ap-main_vpc"
+    Name = "ce7-ap-main-vpc"
   }
 }
 

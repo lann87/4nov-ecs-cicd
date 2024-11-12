@@ -2,20 +2,23 @@
 
 output "vpc_id" {
   # Outputs the VPC ID
-  value = aws_vpc.main_vpc.id
+  value = {
+    id   = aws_vpc.main_vpc.id
+    name = aws_vpc.main_vpc.tags["Name"]
+  }
 }
 
 output "pubsub_ids" {
   # Outputs the IDs of the public subnets created
   value = {
-    for subnet in aws_subnet.pub_subnets : subnet.tags["name"] => subnet.id
+    for subnet in aws_subnet.pub_subnets : subnet.tags["Name"] => subnet.id
   }
 }
 
 output "pvtsub_ids" {
   # Outputs the IDs of the private subnets created
   value = {
-    for sunet in aws_subnet.pvt_subnets : subnet.tags["name"] => subnet.id
+    for subnet in aws_subnet.pvt_subnets : subnet.tags["Name"] => subnet.id
   }
 }
 
