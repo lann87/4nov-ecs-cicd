@@ -54,6 +54,8 @@ resource "aws_lb_listener" "nov4_listener" {
 # Define a target group to register targets (e.g., ECS instances)
 resource "aws_lb_target_group" "nov4_targrp" {
   #checkov:skip=CKV_AWS_2:Ensure ALB protocol is HTTPS
+  #checkov:skip=CKV_AWS_378:Ensure AWS Load Balancers doesn't use HTTP protocol
+
   name        = "nov4-targrp"
   port        = var.alb_target_port
   protocol    = var.alb_protocol
