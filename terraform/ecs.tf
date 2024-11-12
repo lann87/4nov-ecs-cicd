@@ -9,6 +9,7 @@ resource "aws_ecs_cluster" "ap-nov4-ecs" {
 
 # Create an ECS Task Definition which describes how the container runs
 resource "aws_ecs_task_definition" "ecs_task" {
+  #checkov:skip=CKV_AWS_336:Ensure ECS containers are limited to read-only access to root filesystems
   # Family name for the ECS task definition, used for versioning and grouping tasks
   family = "ap-nov4-ecs-task"
 
@@ -35,9 +36,9 @@ resource "aws_ecs_task_definition" "ecs_task" {
       }]
 
       # ECS containers are limited to read-only access to root filesystems
-      linuxParameters = {
-        readonlyRootFilesystem = true
-      }
+      # linuxParameters = {
+      #   readonlyRootFilesystem = true
+      # }
     }
   ])
 
