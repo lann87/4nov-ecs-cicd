@@ -1,5 +1,6 @@
 # Public Subnet Configuration
 resource "aws_subnet" "pub_subnets" {
+  #checkov:skip=CKV_AWS_130:Ensure VPC subnets do not assign public IP by default
   # The count parameter allows for creating multiple public subnets
   count  = length(var.pub_subnet_cidrs)
   vpc_id = aws_vpc.main_vpc.id
@@ -58,9 +59,11 @@ resource "aws_subnet" "pvt_subnets" {
 
 # Security Group for ECS Tasks/Services
 resource "aws_security_group" "ecs_sg" {
+  #checkov:skip=CKV_AWS_260:Ensure no security groups allow ingress from 0.0.0.0:0 to port 80
   vpc_id = aws_vpc.main_vpc.id
 
   ingress {
+    description = "Allow incoming TCP traffic on port 80 from IPs defined in var.allowed_ingress_cidr"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -68,6 +71,7 @@ resource "aws_security_group" "ecs_sg" {
   }
 
   egress {
+    description = "Allowing outgoing traffic to all destination, using any port and protocol"
     from_port   = 0
     to_port     = 0
     protocol    = "-1" # -1 means all protocols

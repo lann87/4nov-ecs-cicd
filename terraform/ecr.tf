@@ -3,7 +3,11 @@ resource "aws_ecr_repository" "nov4_ecs_ecr" {
   name = var.ecr_repo_name
 
   # Allowing/Disallow image tags to be overwritten
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
+
+  encryption_configuration {
+    encryption_type = "KMS"
+  }
 
   # Image scanning configuration to automatically scan images for vulnerabilities when they are pushed
   image_scanning_configuration {
@@ -16,6 +20,6 @@ resource "aws_ecr_repository" "nov4_ecs_ecr" {
 }
 
 # Data source to retrieve the details of the ECR repository created above
-data "aws_ecr_repository" "nov4_ecr_repo_data" {
-  name = aws_ecr_repository.nov4_ecs_ecr.name
-}
+#data "aws_ecr_repository" "nov4_ecr_repo_data" {
+#  name = aws_ecr_repository.nov4_ecs_ecr.name
+#}

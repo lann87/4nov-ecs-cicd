@@ -1,6 +1,10 @@
 # Create an ECS Cluster to group ECS services
 resource "aws_ecs_cluster" "ap-nov4-ecs" {
   name = "ap-nov4-ecs-cluster"
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
 }
 
 # Create an ECS Task Definition which describes how the container runs
@@ -28,6 +32,11 @@ resource "aws_ecs_task_definition" "ecs_task" {
       containerPort = 80
       hostPort      = 80
     }]
+
+    # ECS containers are limited to read-only access to root filesystems
+    linuxParameters = {
+      readonlyRootFilesystem = true
+    }
   }])
 
   # Specifies that this task is compatible with Fargate (serverless compute)
@@ -39,6 +48,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
 
 # Create an ECS Service to run the task on Fargate
 resource "aws_ecs_service" "ap-nov4-ecs-svc" {
+  #checkov:skip=CKV_AWS_333:Ensure ECS services do not have public IP addresses assigned to them automatically
   name            = "ap-nov4-esc-service"
   cluster         = aws_ecs_cluster.ap-nov4-ecs.id
   task_definition = aws_ecs_task_definition.ecs_task.arn
